@@ -1,75 +1,44 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Psychic Game</title>
+    <title>Hangman Game</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 </head>
 
 <body>
+    <div class='topmatter'>
+        <!-- encloses topmatter -->
+        <div class='hang-container'>
+            <div class='scaffolding-top'></div>
+            <div class='scaffolding-left'></div>
 
-    <div id="title">
-        The Psychic Game
+            <div class='draw-area'>
+                <div class='rope'></div>
+            </div>
+
+            <div class='scaffolding-base'></div>
+        </div>
+        <div class='side-container'>
+            <div class='container-title'>Guess A Letter!</div>
+            <div class='input-area'>
+                <input id='letter-input' type='text' maxlength='1' />
+            </div>
+        </div>
+
+        <div class='side-container'>
+            <div class='container-title'>Guessed Letters</div>
+            <div id="wrong-letters" class='input-area'></div>
+        </div>
     </div>
-
-    <div class="statement">
-        Guess what ketter I'm thinking of
+    <div class='bottommatter'>
+        <div class='word-box'>
+            <div class='word-display'>
+            </div>
+        </div>
     </div>
-
-    <script type="text/javascript">
-        // Whenever a key is pressed, alert "pressed a button".
-        var guesses = [];
-        var guessesLeft = 9;
-        var wins = 0;
-        var losses = 0;
-
-        var gameStatus = document.getElementById("statement");
-
-        document.onkeyup = function () {
-            alert("pressed a button");
-
-
-            // var win, loss, ties;
-            var userGuess = event.key;
-
-            //freeze key only pass r,s,p
-            var computerGuess = combinations[Math.floor(Math.random() * combinations.length)];
-
-            // Alerts the key the user pressed (userGuess).
-            alert("User guess: " + userGuess);
-
-            // Alerts the Computer's guess.
-            alert("Computer guess: " + computerGuess);
-            if (combinations.length > -1) {
-
-                //choice.forEach(function(item, index, array) {
-
-                if (userGuess === computerGuess) {
-                    wins++;
-                    guessesLeft--;
-                    console.log('wins: ' + wins);
-                } else if (userGuess !== computerGuess) {
-                    losses++;
-                    guessesLeft--;
-                    console.log('losses: '+losses);
-                }
-                else {
-                    guessesLeft--;
-                }
-                //});
-            }
-
-            gameStatus.innerHTML = `
-                <p>Wins: ${wins}</p>
-                <p>Losses: ${losses}</p>
-                <p>Guesses Left: ${guessesLeft}</p>
-                <p>losses: ${userGuess}</p>
-                `;
-            };
-
-        //
-    </script>
-
 </body>
+<script src='assets/javascript/hangmanLogic.js'></script>
 
 </html>

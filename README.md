@@ -15,7 +15,7 @@ Browse to the folder where you cloned the repository and open the index.html in 
 
 Screenshot
 --------------
-![Screenshot of Random Hangman](http://games.globalaircraft.org/photos/hangman_game.gif)
+![Screenshot of Random Hangman](https://github.com/sharstream/Hangman-Game/blob/master/assets/images/playHangman.jpg?raw=true)
 
 ```markdown
 `//Hangman object

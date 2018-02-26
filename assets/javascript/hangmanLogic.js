@@ -16,12 +16,13 @@ var guessesLeft = 0;
 var wins = 0;
 var loss = 0;
 var letterGuessed = '';
+var regex = '/^[a-zA-Z\s]+$/';
 //Hangman object
 var hangman = {
     words: ['cat', 'tree', 'swing', 'around', 'scientist'],
     guessesLeft:0,
     wins:0,
-    loss:0,
+    missed:0,
     letterGuessed:[],
     gameAnswer:'',
     gameShownAnswer:'',
@@ -34,10 +35,10 @@ var hangman = {
 
 function resetGame() {
     resetUI();
-    gameAnswer = chooseWord();
-    gameShownAnswer = blanksFromAnswer(gameAnswer);
-    hangmanState = 0;
-    drawWord(gameShownAnswer);
+    hangman.gameAnswer = chooseWord();
+    hangman.gameShownAnswer = blanksFromAnswer(hangman.gameAnswer);
+    hangman.hangmanState = 0;
+    drawWord(hangman.gameShownAnswer);
 }
 
 $(document).ready(resetGame);
@@ -46,26 +47,30 @@ function win() { alert('You win!'); resetGame(); }
 
 function lose() { alert('Oh no, you lose!'); resetGame(); }
 
-//
-/// Start working here!
 function doKeypress() {
+
+    // if (regex === $('#letter-input').val().toLowerCase()) 
     var tempChar = $('#letter-input').val().toLowerCase();
     var tempString = "";
     $('#letter-input').val("");
+
+    // Write here!
+    tempString = guessLetter(tempChar, hangman.gameShownAnswer, hangman.gameAnswer);
+    if (tempString != hangman.gameShownAnswer) {
+        updateWord(tempString);
+        hangman.gameShownAnswer = tempString;
+        if (hangman.gameShownAnswer === hangman.gameAnswer) {
+            win();
+        }
+    } else {
+        wrongLetter(tempChar);
+        drawSequence[hangman.hangmanState++]();
+        if (hangman.hangmanState === drawSequence.length) {
+            lose();
+        }
+    }
 }
-
-// You shouldn't have to touch this!
-$('#letter-input').keypress(doKeypress);
-
-document.onload(function name(params) {
-    var userGuess = document.onkeyup(function (event) {
-        return event.key;
-        console.log('Event Key pressed: ' + event.key);
-    });
-
-    //write a regex to validate 
-    document.getElementById("word_underscore").innerHTML = "";
-});
+$('#letter-input').keyup(doKeypress);
     
 /* --Hangman game string manipulation--------- *
 *                                              *
@@ -73,11 +78,11 @@ document.onload(function name(params) {
 
 function chooseWord() {
     // Write code here
-    if (words.length() > -1) {
-        return words[Math.floor(Math.random() * combinations.length)].toLowerCase();
+    if (hangman.words.length > -1) {
+        return hangman.words[Math.floor(Math.random() * hangman.words.length)];
     }
 
-    console.log('The random word is: '+words[Math.floor(Math.random() * combinations.length)].toLowerCase());
+    console.log('The random word is: ' + hangman.words[Math.floor(Math.random() * hangman.words.length)]);
 }
 
 //return (userGuess === computerGuess) ? userGuess : computerGuess;
@@ -113,13 +118,14 @@ function guessLetter(letter, shown, answer) {
     return shown;
 }
 
-/* --UI reset event and listener-------- *
+/* ------ UI canvas element ------------ *
 *                                        *
 * -------------------------------------- */
 
 function drawHead() {
     $('.draw-area').append($('<div/>').addClass("body-part head"));
 }
+
 function drawTorso() {
     $('.draw-area').append(
         $('<div/>').addClass("body-part armbox").append(
@@ -128,23 +134,30 @@ function drawTorso() {
         $('<div/>').addClass("body-part legbox").append(
             $('<div/>').addClass("body-part pelvis")));
 }
+
 function drawLeftArm() {
     $('.armbox').prepend($('<div/>').addClass("body-part leftarm"));
 }
+
 function drawRightArm() {
     $('.armbox').prepend($('<div/>').addClass("body-part rightarm"));
 }
+
 function drawLeftLeg() {
     $('.legbox').prepend($('<div/>').addClass("body-part leftleg"));
 }
+
 function drawRightLeg() {
     $('.legbox').prepend($('<div/>').addClass("body-part rightleg"));
 }
+
 var drawSequence = [drawHead, drawTorso, drawLeftArm, drawRightArm, drawLeftLeg, drawRightLeg];
+
 function wrongLetter(letter) {
     $('#wrong-letters').append(
         $('<span/>').addClass('guessed-letter').text(letter));
 }
+
 function resetUI() {
     $('.body-part').remove();
     $('.guessed-letter').remove();

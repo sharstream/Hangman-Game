@@ -6,16 +6,7 @@
 // You don't need to touch these. Skip down to doKeypress()
 
 /* --Hangman Game variables ---------- */
-
-var gameAnswer = "";
-var gameShownAnswer = "";
-var hangmanState = "";
-// array holds the words we are going to choose from.
-var words = ['cat', 'tree', 'swing', 'around', 'scientist'];
-var guessesLeft = 0;
-var wins = 0;
-var loss = 0;
-var letterGuessed = '';
+//regex expression to avoid any symbols or numbers
 var regex = '/^[a-zA-Z\s]+$/';
 //Hangman object
 var hangman = {
@@ -48,8 +39,6 @@ function win() { alert('You win!'); resetGame(); }
 function lose() { alert('Oh no, you lose!'); resetGame(); }
 
 function doKeypress() {
-
-    // if (regex === $('#letter-input').val().toLowerCase()) 
     var tempChar = $('#letter-input').val().toLowerCase();
     var tempString = "";
     $('#letter-input').val("");
@@ -85,7 +74,6 @@ function chooseWord() {
     console.log('The random word is: ' + hangman.words[Math.floor(Math.random() * hangman.words.length)]);
 }
 
-//return (userGuess === computerGuess) ? userGuess : computerGuess;
 function blanksFromAnswer(answerWord) {
 
     var result = ""; // This is the variable we want to use
@@ -103,6 +91,9 @@ function blanksFromAnswer(answerWord) {
 }
 
 //replacing strings modules
+//originalString source string
+//n position that the letter should be replaced
+//c character to insert.
 
 function alterAt(n, c, originalString) {
     return originalString.substr(0, n) + c + originalString.substr(n + 1, originalString.length);
@@ -111,14 +102,22 @@ function guessLetter(letter, shown, answer) {
     var checkIndex = 0;
 
     checkIndex = answer.indexOf(letter);
+    console.log(answer.indexOf(letter));
     while (checkIndex >= 0) {
+
+        // var n = checkIndex;
+        // for (var index = checkIndex; index < answer.length; index++) {
+        //     shown = answer.substr(0, index) + letter + answer.substr(letter, index++);
+        //     checkIndex = answer.indexOf(letter, index++);
+        // }
         shown = alterAt(checkIndex, letter, shown);
+        console.log(answer.indexOf(letter,checkIndex+1));
         checkIndex = answer.indexOf(letter, checkIndex + 1);
     }
     return shown;
 }
 
-/* ------ UI canvas element ------------ *
+/* ------ UI browser interactions ------ *
 *                                        *
 * -------------------------------------- */
 

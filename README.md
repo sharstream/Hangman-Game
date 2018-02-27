@@ -6,8 +6,9 @@ This game has been built in a day of completely boredom after js class. I hope y
 
 Needs
 --------------
-- src='assets/javascript/hangmanLogic.js'
-- href="assets/css/style.css"
+- jQuery 3.3.1
+- hangmanLogic javascript file
+- style.css file
 
 ### Know-How
 - Rules of the road

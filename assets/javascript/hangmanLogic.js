@@ -7,7 +7,7 @@
 
 /* --Hangman Game variables ---------- */
 //regex expression to avoid any symbols or numbers
-var regex = '/^[a-zA-Z\s]+$/';
+var regex = /^[a-zA-Z\s]+$/;
 //Hangman object
 var hangman = {
     words: ['cat', 'tree', 'swing', 'around', 'scientist'],
@@ -103,17 +103,20 @@ function guessLetter(letter, shown, answer) {
 
     checkIndex = answer.indexOf(letter);
     console.log(answer.indexOf(letter));
-    while (checkIndex >= 0) {
+    // if (regex.text(letter)) {
+        while (checkIndex >= 0) {
 
         // var n = checkIndex;
         // for (var index = checkIndex; index < answer.length; index++) {
         //     shown = answer.substr(0, index) + letter + answer.substr(letter, index++);
         //     checkIndex = answer.indexOf(letter, index++);
         // }
-        shown = alterAt(checkIndex, letter, shown);
-        console.log(answer.indexOf(letter,checkIndex+1));
-        checkIndex = answer.indexOf(letter, checkIndex + 1);
-    }
+        
+            shown = alterAt(checkIndex, letter, shown);
+            console.log(answer.indexOf(letter, checkIndex + 1));
+            checkIndex = answer.indexOf(letter, checkIndex + 1);
+        }
+    // }
     return shown;
 }
 

@@ -13,7 +13,7 @@ var hangman = {
     words: ['cat', 'tree', 'swing', 'around', 'scientist'],
     guessesLeft:0,
     wins:0,
-    missed:0,
+    missed:0,   
     letterGuessed:[],
     gameAnswer:'',
     gameShownAnswer:'',
@@ -44,19 +44,26 @@ function doKeypress() {
     $('#letter-input').val("");
 
     // Write here!
-    tempString = guessLetter(tempChar, hangman.gameShownAnswer, hangman.gameAnswer);
-    if (tempString != hangman.gameShownAnswer) {
-        updateWord(tempString);
-        hangman.gameShownAnswer = tempString;
-        if (hangman.gameShownAnswer === hangman.gameAnswer) {
-            win();
+    if (regex.test(tempChar)) {
+    // if(tempChar.match(regex)) {
+        
+        tempString = guessLetter(tempChar, hangman.gameShownAnswer, hangman.gameAnswer);
+        if (tempString != hangman.gameShownAnswer) {
+            updateWord(tempString);
+            hangman.gameShownAnswer = tempString;
+            if (hangman.gameShownAnswer === hangman.gameAnswer) {
+                win();
+            }
+        } else {
+            wrongLetter(tempChar);
+            drawSequence[hangman.hangmanState++]();
+            if (hangman.hangmanState === drawSequence.length) {
+                lose();
+            }
         }
-    } else {
-        wrongLetter(tempChar);
-        drawSequence[hangman.hangmanState++]();
-        if (hangman.hangmanState === drawSequence.length) {
-            lose();
-        }
+    }
+    else{
+        alert('Is not a letter: '+tempChar);
     }
 }
 $('#letter-input').keyup(doKeypress);
@@ -103,7 +110,7 @@ function guessLetter(letter, shown, answer) {
 
     checkIndex = answer.indexOf(letter);
     console.log(answer.indexOf(letter));
-    // if (regex.text(letter)) {
+    if (regex.test(letter)) {
         while (checkIndex >= 0) {
 
         // var n = checkIndex;
@@ -116,7 +123,7 @@ function guessLetter(letter, shown, answer) {
             console.log(answer.indexOf(letter, checkIndex + 1));
             checkIndex = answer.indexOf(letter, checkIndex + 1);
         }
-    // }
+    }
     return shown;
 }
 

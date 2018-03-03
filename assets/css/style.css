@@ -3,6 +3,7 @@ body {
     font-weight:bold; 
     font-size:16pt;
     background: url(../images/hangman.jpg) no-repeat;
+    transition: all 1s ease-in-out;
 }
 /* Topmatter */
 .topmatter {

@@ -8,6 +8,7 @@
 /* --Hangman Game variables ---------- */
 //regex expression to avoid any symbols or numbers
 var regex = /^[a-zA-Z\s]+$/;
+var colors = ["red","blue","green"];
 //Hangman object
 var hangman = {
     words: ['cat', 'tree', 'swing', 'around', 'scientist'],
@@ -32,17 +33,27 @@ function resetGame() {
     drawWord(hangman.gameShownAnswer);
 }
 
-$(document).ready(resetGame);
+$(document).ready();
 
 function win() { alert('You win!'); resetGame(); }
 
 function lose() { alert('Oh no, you lose!'); resetGame(); }
 
+function smoothTrans() {
+
+    var randomColor = colors[Math.floor(Math.random() * colors.length)];
+    //set initial body color
+    $('body').css('background', randomColor);
+    setTimeout(function(){
+        smoothTrans();
+    }, 1000);
+};
+
 function doKeypress() {
     var tempChar = $('#letter-input').val().toLowerCase();
     var tempString = "";
     $('#letter-input').val("");
-
+    
     // Write here!
     if (regex.test(tempChar)) {
     // if(tempChar.match(regex)) {
@@ -51,6 +62,10 @@ function doKeypress() {
         if (tempString != hangman.gameShownAnswer) {
             updateWord(tempString);
             hangman.gameShownAnswer = tempString;
+            // Gets Link for Theme Song
+            // $("#stream").('stream', function () {
+            //     $("#stream").html("Play");
+            // });
             if (hangman.gameShownAnswer === hangman.gameAnswer) {
                 win();
             }

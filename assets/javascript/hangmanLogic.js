@@ -49,6 +49,8 @@ function smoothTrans() {
     }, 1000);
 };
 
+console.log(smoothTrans());
+
 $(document).ready(function () {
     var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', 'assets/sounds/captainplanet24.mp3');
@@ -78,7 +80,6 @@ $(document).ready(function () {
     });
 });
 
-console.log(smoothTrans());
 function doKeypress() {
     var tempChar = $('#letter-input').val().toLowerCase();
     var tempString = "";

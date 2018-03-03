@@ -43,7 +43,7 @@ function smoothTrans() {
 
     var randomColor = colors[Math.floor(Math.random() * colors.length)];
     //set initial body color
-    $('body').css('background', randomColor);
+    $('.word-background-color-change').css('background', randomColor);
     setTimeout(function(){
         smoothTrans();
     }, 1000);
@@ -51,34 +51,34 @@ function smoothTrans() {
 
 console.log(smoothTrans());
 
-$(document).ready(function () {
-    var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'assets/sounds/captainplanet24.mp3');
+// $(document).ready(function () {
+//     var audioElement = document.createElement('audio');
+//     audioElement.setAttribute('src', 'assets/sounds/captainplanet24.mp3');
 
-    audioElement.addEventListener('ended', function () {
-        this.play();
-    }, false);
+//     audioElement.addEventListener('ended', function () {
+//         this.play();
+//     }, false);
 
-    audioElement.addEventListener("canplay", function () {
-        $("#length").text("Duration:" + audioElement.duration + " seconds");
-        $("#source").text("Source:" + audioElement.src);
-        $("#status").text("Status: Ready to play").css("color", "green");
-    });
+//     audioElement.addEventListener("canplay", function () {
+//         $("#length").text("Duration:" + audioElement.duration + " seconds");
+//         $("#source").text("Source:" + audioElement.src);
+//         $("#status").text("Status: Ready to play").css("color", "green");
+//     });
 
-    audioElement.addEventListener("timeupdate", function () {
-        $("#currentTime").text("Current second:" + audioElement.currentTime);
-    });
+//     audioElement.addEventListener("timeupdate", function () {
+//         $("#currentTime").text("Current second:" + audioElement.currentTime);
+//     });
 
-    $('#play').click(function () {
-        audioElement.play();
-        $("#status").text("Status: Playing");
-    });
+//     $('#play').click(function () {
+//         audioElement.play();
+//         $("#status").text("Status: Playing");
+//     });
 
-    $('#pause').click(function () {
-        audioElement.pause();
-        $("#status").text("Status: Paused");
-    });
-});
+//     $('#pause').click(function () {
+//         audioElement.pause();
+//         $("#status").text("Status: Paused");
+//     });
+// });
 
 function doKeypress() {
     var tempChar = $('#letter-input').val().toLowerCase();

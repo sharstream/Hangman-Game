@@ -1,14 +1,21 @@
 ## Welcome to my Hangman Game in JS
 
-**Simple Hangman written in less than 100 lines of JS with random words brought.**
+**Simple Hangman with random words brought.**
 
-This game has been built in a day of completely boredom after js class. I hope you enjoy.
+This game has been built using jQuery and Javascript programming.
 
-Needs
---------------
+Installation requirements
+-------------------------
 - jQuery 3.3.1
 - hangmanLogic javascript file
 - style.css file
+
+### How play the Game
+- Type a letter on the text input area
+- If you enter a number or symbol the system prompts an error message: "Is not a letter: number or symbol"
+- You have two choice 1. Guess A Letter! and 2. Guessed Letters.
+    - Guess A Letter!: text input area.
+    - Guessed Letters: array of failed letters.
 
 ### Know-How
 - Rules of the road

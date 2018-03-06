@@ -109,7 +109,7 @@ function doKeypress() {
         }
     }
     else{
-        alert('Is not a letter: '+tempChar);
+        alert('You enter a symbol or number, you should enter a letter: '+tempChar);
     }
 }
 $('#letter-input').keyup(doKeypress);
